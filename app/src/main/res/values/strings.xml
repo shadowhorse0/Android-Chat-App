@@ -11,4 +11,14 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="chatapp">chatapp</string>
     <string name="welcome_back">welcome_back</string>
+    <string name="create_account">Create Account</string>
+    <string name="create_a_new_account">Create a new account</string>
+    <string name="abc_xyz">abc xyz</string>
+    <string name="username">Username</string>
+    <string name="_9876543210">9876543210</string>
+    <string name="phone">Phone</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="create_account2">Create account</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="sign_in">Sign in</string>
 </resources>
