@@ -66,6 +66,7 @@
                     app:tint="@color/design_default_color_primary" />
 
                 <EditText
+                    android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:background="@null"
@@ -125,6 +126,7 @@
                     android:src="@drawable/ic_email"
                     app:tint="@color/design_default_color_primary"/>
                 <EditText
+                    android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:background="@null"
@@ -183,6 +185,7 @@
                     android:src="@drawable/ic_phone_android"
                     app:tint="@color/design_default_color_primary"/>
                 <EditText
+                    android:id="@+id/phone"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:background="@null"
@@ -241,6 +244,7 @@
                     android:src="@drawable/ic_lock"
                     app:tint="@color/design_default_color_primary"/>
                 <EditText
+                    android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:background="@null"
@@ -335,6 +339,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
+            android:id="@+id/singup"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginStart="20dp"
@@ -350,6 +355,15 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/response"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/response"
+            android:textColor="@color/teal_700"
+            android:textSize="17sp"/>
 
 
 
@@ -378,6 +392,7 @@
                 android:textColor="@color/design_default_color_primary"
                 android:textSize="17sp"
                 android:textStyle="bold" />
+
         </LinearLayout>
 
     </LinearLayout>

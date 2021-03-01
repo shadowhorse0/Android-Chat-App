@@ -21,4 +21,5 @@
     <string name="create_account2">Create account</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="sign_in">Sign in</string>
+    <string name="response">response</string>
 </resources>
