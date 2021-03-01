@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Chatapp">
+        <activity android:name=".SignupActivity"></activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
