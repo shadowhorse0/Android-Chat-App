@@ -80,14 +80,13 @@ public class SignupActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
                             if(response.isSuccessful()){
-                                String myResponse = response.body().string();
+                                final String myResponse = response.body().string();
                                 SignupActivity.this.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
                                         result.setText(myResponse);
                                     }
                                 });
-                                result.setText(myResponse);
                             }
                     }
                 });
