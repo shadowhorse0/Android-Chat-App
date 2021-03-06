@@ -77,7 +77,7 @@ public class SignupActivity extends AppCompatActivity {
                 MediaType mediaType = MediaType.parse("text/plain");
                 RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
                         .addFormDataPart("request_type","signup")
-                        .addFormDataPart("data","{\"username\":\"vaibhav\",\"email\":\"vaibhav.111padghan@gmail.com\",\"phone\":\"7517263842\",\"password\":\"vaibhav\"}")
+                        .addFormDataPart("data",data.toString())
                         .build();
 
                 String url = "http://139.59.8.238/requests/endpoint.php";
