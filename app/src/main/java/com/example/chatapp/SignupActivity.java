@@ -13,11 +13,18 @@ import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
+
+
 public class SignupActivity extends AppCompatActivity {
+
+    
     TextView result;
     EditText username;
     EditText email;
@@ -64,9 +71,16 @@ public class SignupActivity extends AppCompatActivity {
                 }
 
                 //trying post request
-                OkHttpClient client = new OkHttpClient();
+                OkHttpClient client = new OkHttpClient().newBuilder()
+                        .build();
 
-                String url = "https://reqres.in/api/users?page=2";
+                MediaType mediaType = MediaType.parse("text/plain");
+                RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                        .addFormDataPart("request_type","signup")
+                        .addFormDataPart("data","{\"username\":\"vaibhav\",\"email\":\"vaibhav.111padghan@gmail.com\",\"phone\":\"7517263842\",\"password\":\"vaibhav\"}")
+                        .build();
+
+                String url = "http://139.59.8.238/requests/endpoint.php";
 
                 Request request = new Request.Builder()
                         .url(url)
