@@ -84,6 +84,7 @@ public class SignupActivity extends AppCompatActivity {
 
                 Request request = new Request.Builder()
                         .url(url)
+                        .method("POST", body)
                         .build();
                 client.newCall(request).enqueue(new Callback() {
                     @Override
