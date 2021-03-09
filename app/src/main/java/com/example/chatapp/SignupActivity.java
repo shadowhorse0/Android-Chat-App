@@ -3,11 +3,13 @@ package com.example.chatapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
+
 import org.json.JSONObject;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -22,10 +24,10 @@ import okhttp3.Response;
 
 
 
+
 public class SignupActivity extends AppCompatActivity {
 
-    
-    TextView result;
+
     EditText username;
     EditText email;
     EditText phone;
@@ -36,7 +38,12 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        result = findViewById(R.id.response);
+        chatapp chatapp=new chatapp();
+
+
+
+
+
         username = findViewById(R.id.username);
         email= findViewById(R.id.email);
         phone= findViewById(R.id.phone);
@@ -70,41 +77,29 @@ public class SignupActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
+
                 //trying post request
-                OkHttpClient client = new OkHttpClient().newBuilder()
-                        .build();
 
-                MediaType mediaType = MediaType.parse("text/plain");
-                RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
-                        .addFormDataPart("request_type","signup")
-                        .addFormDataPart("data",data.toString())
-                        .build();
+                String myResponse=chatapp.endpoint(data.toString(),"signup");
 
-                String url = "http://139.59.8.238/requests/endpoint.php";
 
-                Request request = new Request.Builder()
-                        .url(url)
-                        .method("POST", body)
-                        .build();
-                client.newCall(request).enqueue(new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        e.printStackTrace();
-                    }
 
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                            if(response.isSuccessful()){
-                                final String myResponse = response.body().string();
-                                SignupActivity.this.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        result.setText(myResponse);
-                                    }
-                                });
-                            }
-                    }
-                });
+//                JSONObject res=  JSONObject (JSONObject copyFrom,
+//                        String[] myResponse);
+
+
+
+                Toast.makeText(SignupActivity.this,  myResponse, Toast.LENGTH_SHORT).show();
+
+
+                //SignupActivity.this.runOnUiThread(new Runnable() {
+                  //  @Override
+                    //public void run() {
+                      //  result.setText(myResponse);
+                    //}
+                //});
+
+
 
 
             }
@@ -115,3 +110,4 @@ public class SignupActivity extends AppCompatActivity {
         });
     }
 }
+
