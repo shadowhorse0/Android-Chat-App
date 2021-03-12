@@ -1,6 +1,8 @@
 package com.example.chatapp;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -13,11 +15,10 @@ import okhttp3.Response;
 public class chatapp{
 
     public  String result;
+    public boolean request_complete;
 
-    public String  endpoint(String data,String requstType){
-
-
-
+    public String  endpoint(String data,String requstType) throws InterruptedException {
+        request_complete = false;
 
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
@@ -43,14 +44,17 @@ public class chatapp{
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if(response.isSuccessful()){
+                    request_complete = true;
                     result = response.body().string();
 
                 }
             }
         });
 
-
-
+        while(!request_complete){
+            TimeUnit.SECONDS.sleep(1);
+        }
         return result;
+
     }
 };
