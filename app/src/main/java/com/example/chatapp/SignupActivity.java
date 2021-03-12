@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONException;
 
 import org.json.JSONObject;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -73,8 +75,6 @@ public class SignupActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try{
                     //disabling button at start
-                    signup.setEnabled(false);
-                    signup.setText("Processing...");
 
                     //check if password and cpassword are same
                     if(!((cpassword.getText().toString()).equals(password.getText().toString()))){
@@ -95,8 +95,6 @@ public class SignupActivity extends AppCompatActivity {
 
                     //sending request to server
                     String myResponse=chatapp.endpoint(data.toString(),"signup");
-                    signup.setText("CREATE ACCOUNT");
-                    signup.setEnabled(true);
                     JSONObject response = new JSONObject(myResponse);
 
                     //handling if response is fail
@@ -107,6 +105,10 @@ public class SignupActivity extends AppCompatActivity {
 
                    //showing success message if everything is okay
                     Toast.makeText(SignupActivity.this,  response.getString("msg"), Toast.LENGTH_SHORT).show();
+
+
+                   startActivity(new Intent(getApplicationContext(),MainActivity.class));
+
 
                 }catch (Exception e){
                     Toast.makeText(SignupActivity.this,  e.getMessage(), Toast.LENGTH_SHORT).show();
