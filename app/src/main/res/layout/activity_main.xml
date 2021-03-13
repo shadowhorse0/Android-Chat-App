@@ -104,17 +104,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="41dp"
                     android:layout_marginLeft="41dp"
+                    android:background="@color/white"
                     android:paddingStart="6dp"
                     android:paddingEnd="6dp"
-                    android:text="Email"
+                    android:text="Username"
                     android:textAllCaps="true"
                     android:textColor="@color/teal_700"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/layoutEmail"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/layoutEmail"
 
-                    android:background="@color/white"/>
+                    app:layout_constraintTop_toTopOf="@+id/layoutEmail" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
