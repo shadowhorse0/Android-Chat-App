@@ -79,7 +79,13 @@ public class SignupActivity extends AppCompatActivity {
                         try{
                             //disabling button at start
                             signup.setText("Processing...");
-//                            signup.setEnabled(false);
+
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    signup.setEnabled(false);
+                                }
+                            });
 
 
                             //check if password and cpassword are same
@@ -130,7 +136,12 @@ public class SignupActivity extends AppCompatActivity {
                                 public void run() {
                                     Log.d("UI thread", "I am the UI thread");
                                     signup.setText("CREATE ACCOUNT");
-//                                    signup.setEnabled(true);
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            signup.setEnabled(true);
+                                        }
+                                    });
                                     Toast.makeText(SignupActivity.this,  e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             });
