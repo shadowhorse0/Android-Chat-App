@@ -66,6 +66,15 @@ public class MainActivity extends AppCompatActivity {
                             //disabling button at start
                             signin.setText("Processing...");
 
+                            runOnUiThread(new Runnable() {
+
+                                @Override
+                                public void run() {
+                                    signin.setEnabled(false);
+                                }
+                            });
+
+
 
                             //making json object of all data like username and passoword to sent to server
 
@@ -111,6 +120,17 @@ public class MainActivity extends AppCompatActivity {
                                 public void run() {
                                     Log.d("UI thread", "I am the UI thread");
                                     signin.setText("SIGN_IN");
+
+                                    //dusdgv
+                                    runOnUiThread(new Runnable() {
+
+                                        @Override
+                                        public void run() {
+                                            signin.setEnabled(true);
+                                        }
+                                    });
+
+
                                     Toast.makeText(MainActivity.this,  e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             });
