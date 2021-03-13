@@ -106,6 +106,14 @@ public class MainActivity extends AppCompatActivity {
                                     try {
                                         Toast.makeText(MainActivity.this,  response.getString("msg"), Toast.LENGTH_SHORT).show();
                                         //redirecting to welcome page
+
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                signin.setEnabled(true);
+                                            }
+                                        });
+                                        signin.setText("SIGN_IN");
                                         startActivity(new Intent(getApplicationContext(),welcome.class));
                                     } catch (JSONException e) {
                                         e.printStackTrace();
