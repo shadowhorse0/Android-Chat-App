@@ -73,86 +73,74 @@ public class SignupActivity extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try{
-                    //disabling button at start
 
-                    //check if password and cpassword are same
-                    if(!((cpassword.getText().toString()).equals(password.getText().toString()))){
-                        throw new Exception("password and confirm password do not match!");
+                Runnable r = new Runnable() {
+                    public void run() {
+                        try{
+                            //disabling button at start
+                            signup.setText("Processing...");
+//                            signup.setEnabled(false);
+
+
+                            //check if password and cpassword are same
+                            if(!((cpassword.getText().toString()).equals(password.getText().toString()))){
+                                throw new Exception("password and confirm password do not match!");
+                            }
+
+                            //making json object of all data like username,email, passoword to sent to server
+
+                            JSONObject data = new JSONObject();
+                            try{
+                                data.put("username",username.getText().toString());
+                                data.put("email",email.getText().toString());
+                                data.put("phone",phone.getText().toString());
+                                data.put("password",password.getText().toString());
+                            }catch(JSONException e){
+                                e.printStackTrace();
+                            }
+
+                            //sending request to server
+                            String myResponse=chatapp.endpoint(data.toString(),"signup");
+                            JSONObject response = new JSONObject(myResponse);
+
+                            //handling if response is fail
+                            Log.d("myapp",response.toString());
+                            if(!response.getBoolean("status")){
+                                throw new Exception(response.getString("msg"));
+                            }
+
+                            //showing success message if everything is okay
+                            SignupActivity.this.runOnUiThread(new Runnable() {
+                                public void run() {
+                                    Log.d("UI thread", "I am the UI thread");
+                                    signup.setText("SIGN_IN");
+                                    try {
+                                        Toast.makeText(SignupActivity.this,  response.getString("msg"), Toast.LENGTH_SHORT).show();
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+
+                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+
+
+                        }catch (Exception e){
+                            SignupActivity.this.runOnUiThread(new Runnable() {
+                                public void run() {
+                                    Log.d("UI thread", "I am the UI thread");
+                                    signup.setText("CREATE ACCOUNT");
+//                                    signup.setEnabled(true);
+                                    Toast.makeText(SignupActivity.this,  e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
                     }
+                };
 
-                    //making json object of all data like username,email, passoword to sent to server
-
-                    JSONObject data = new JSONObject();
-                    try{
-                    data.put("username",username.getText().toString());
-                    data.put("email",email.getText().toString());
-                    data.put("phone",phone.getText().toString());
-                    data.put("password",password.getText().toString());
-                    }catch(JSONException e){
-                    e.printStackTrace();
-                    }
-
-                    //sending request to server
-                    String myResponse=chatapp.endpoint(data.toString(),"signup");
-                    JSONObject response = new JSONObject(myResponse);
-
-                    //handling if response is fail
-                   Log.d("myapp",response.toString());
-                   if(!response.getBoolean("status")){
-                       throw new Exception(response.getString("msg"));
-                   }
-
-                   //showing success message if everything is okay
-                    Toast.makeText(SignupActivity.this,  response.getString("msg"), Toast.LENGTH_SHORT).show();
-
-
-                   startActivity(new Intent(getApplicationContext(),MainActivity.class));
-
-
-                }catch (Exception e){
-                    Toast.makeText(SignupActivity.this,  e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-
-
-                //trying post request
-
-//                String myResponse=chatapp.endpoint(data.toString(),"signup");
-//
-//                try {
-//                    JSONObject response = new JSONObject(myResponse);
-//                    Log.d("myapp",response.getString("msg"));
-//                    if(response.getBoolean("status")){
-//                        Toast.makeText(SignupActivity.this,  "true", Toast.LENGTH_SHORT).show();
-//
-//                    }else{
-//                        Toast.makeText(SignupActivity.this,  "false", Toast.LENGTH_SHORT).show();
-//
-//                    }
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-
-
-//                JSONObject res=  JSONObject (JSONObject copyFrom,
-//                        String[] myResponse);
-
-                //SignupActivity.this.runOnUiThread(new Runnable() {
-                  //  @Override
-                    //public void run() {
-                      //  result.setText(myResponse);
-                    //}
-                //});
-
-
-
+                new Thread(r).start();
 
             }
-
-
-
-
         });
     }
 }
