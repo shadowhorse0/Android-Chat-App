@@ -24,14 +24,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -89,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                             }
 
                             //sending request to server
-                            String myResponse=chatapp.endpoint(data.toString(),"signin");
+                            String myResponse=chatapp.endpoint(data.toString(),"signin",MainActivity.this);
                             JSONObject response = new JSONObject(myResponse);
 
                             //handling if response is fail
