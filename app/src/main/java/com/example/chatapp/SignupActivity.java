@@ -8,6 +8,8 @@ import org.json.JSONObject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -109,8 +111,9 @@ public class SignupActivity extends AppCompatActivity {
                             String myResponse=chatapp.endpoint(data.toString(),"signup");
                             JSONObject response = new JSONObject(myResponse);
 
+
+
                             //handling if response is fail
-                            Log.d("myapp",response.toString());
                             if(!response.getBoolean("status")){
                                 throw new Exception(response.getString("msg"));
                             }
@@ -118,7 +121,6 @@ public class SignupActivity extends AppCompatActivity {
                             //showing success message if everything is okay
                             SignupActivity.this.runOnUiThread(new Runnable() {
                                 public void run() {
-                                    Log.d("UI thread", "I am the UI thread");
                                     signup.setText("SIGN_IN");
                                     try {
                                         Toast.makeText(SignupActivity.this,  response.getString("msg"), Toast.LENGTH_SHORT).show();
