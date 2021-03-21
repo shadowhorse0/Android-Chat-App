@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#C9CFF3"
+    tools:context=".msgwindow">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="8"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/msgbox"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:layout_weight="1"
+                android:background="#0000D40B"
+                android:ems="10"
+                android:hint="Type a message....."
+                android:inputType="textPersonName"
+                android:padding="6dp"
+                android:shadowRadius="@dimen/fab_margin"
+                android:text="Type a message..."
+                android:textColor="#75000000"
+                android:textColorHighlight="#FFFFFF"
+                android:textColorHint="#07FFFFFF"
+                android:textSize="24sp" />
+
+            <ImageView
+                android:id="@+id/addbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="#00FFFFFF"
+                android:tint="#404040"
+                android:translationX="-7"
+                app:srcCompat="@android:drawable/ic_menu_add" />
+
+            <ImageView
+                android:id="@+id/cambutton"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:tint="#404040"
+                android:translationX="-6"
+                android:translationY="1"
+                app:srcCompat="@android:drawable/ic_menu_camera" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/sendbutton"
+        android:layout_width="41dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="690dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="19dp"
+        android:layout_weight="1"
+        android:background="@drawable/circle_green"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_send" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
