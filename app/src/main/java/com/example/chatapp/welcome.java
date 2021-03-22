@@ -16,7 +16,7 @@ public class welcome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-        start=findViewById(R.id.start);
+        start=findViewById(R.id.START);
 
         start.setOnClickListener(new View.OnClickListener() {
             @Override
