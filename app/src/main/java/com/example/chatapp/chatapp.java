@@ -1,5 +1,7 @@
 package com.example.chatapp;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -38,6 +40,8 @@ public class chatapp{
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                Log.d("myapp",e.toString());
+                Log.d("myapp","error occured in postr request");
                 e.printStackTrace();
             }
 
@@ -46,6 +50,7 @@ public class chatapp{
                 if(response.isSuccessful()){
                     request_complete = true;
                     result = response.body().string();
+                    Log.d("myapp",result);
 
                 }
             }
