@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                                             }
                                         });
                                         signin.setText("SIGN_IN");
-                                        startActivity(new Intent(getApplicationContext(),welcome.class));
+                                        startActivity(new Intent(getApplicationContext(),usermsg.class));
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }

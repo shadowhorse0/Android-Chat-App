@@ -31,7 +31,7 @@ public class chatapp{
                 .addFormDataPart("data",data)
                 .build();
 
-        String url = "http://139.59.8.238/requests/endpoint.php";
+        String url = "http://45.79.127.213/requests/endpoint.php";
 
         Request request = new Request.Builder()
                 .url(url)
