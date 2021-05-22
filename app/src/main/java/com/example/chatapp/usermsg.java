@@ -2,6 +2,14 @@ package com.example.chatapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+//db import files
+import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -17,12 +25,21 @@ import org.json.JSONObject;
 public class usermsg extends AppCompatActivity {
     Button sbtn;
     Button rbtn;
-    EditText smsg;
+    EditText smsg,ureceiver;
     TextView rmsg;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SQLiteDatabase chatappdb = openOrCreateDatabase("chatappdb",MODE_PRIVATE,null);
+
+        Cursor resultSet = chatappdb.rawQuery("Select * from info",null);
+        resultSet.moveToFirst();
+        String username = resultSet.getString(0);
+        String password = resultSet.getString(1);
+        Log.d("chatappdb",username+" " +password);
+
+
         chatapp chatapp=new chatapp();
 
 
@@ -34,6 +51,7 @@ public class usermsg extends AppCompatActivity {
         smsg = findViewById(R.id.smsg);
         rbtn= findViewById(R.id.rbtn);
         rmsg = findViewById(R.id.rmsg);
+        ureceiver = findViewById(R.id.ureceiver);
 
         rmsg.setMovementMethod(new ScrollingMovementMethod());
 
@@ -41,6 +59,7 @@ public class usermsg extends AppCompatActivity {
         sbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String username_receiver = ureceiver.getText().toString();
                 Log.d("smsg","click on btn");
                 Log.d("smsg",smsg.getText().toString());
 
@@ -48,8 +67,8 @@ public class usermsg extends AppCompatActivity {
 
                 JSONObject data = new JSONObject();
                 try{
-                    data.put("sender","vaibhav");
-                    data.put("receiver","pranav");
+                    data.put("sender",username);
+                    data.put("receiver",username_receiver);
                     data.put("msg",smsg.getText().toString());
 
 
@@ -96,8 +115,9 @@ public class usermsg extends AppCompatActivity {
                     String  strmsgs = "";
                     for(int i = 0; i < msgs.length(); i++)
                     {
-                        Log.d("rmsg",msgs.get(i).toString());
-                        strmsgs = strmsgs + msgs.get(i).toString() + "\n";
+                        JSONArray msg = msgs.getJSONArray(i);
+                        Log.d("rmsg",msg.toString());
+                        strmsgs = strmsgs + msg.get(1).toString() + " : "+ msg.get(3)+" - "+msg.get(4)+"\n";
 
                     }
                     rmsg.setText(strmsgs);

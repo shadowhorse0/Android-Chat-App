@@ -1,5 +1,12 @@
 package com.example.chatapp;
 
+//db import files
+import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -34,7 +41,6 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
-
     Button signin;
     EditText signin_username;
     EditText signin_password;
@@ -42,6 +48,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //creating table info in db
+        SQLiteDatabase chatappdb = openOrCreateDatabase("chatappdb",MODE_PRIVATE,null);
+        chatappdb.execSQL("CREATE TABLE IF NOT EXISTS 'info'('Username' VARCHAR,'Password' VARCHAR);");
+        chatappdb.execSQL("DELETE FROM 'info'");
+        chatappdb.execSQL("VACUUM");
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -57,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String username = signin_username.getText().toString();
+                String password = signin_password.getText().toString();
 
 
                 Runnable r = new Runnable() {
@@ -80,10 +96,10 @@ public class MainActivity extends AppCompatActivity {
 
                             JSONObject data = new JSONObject();
                             try{
-                                data.put("signin_username",signin_username.getText().toString());
+                                data.put("signin_username",username);
 
 
-                                data.put("signin_password",signin_password.getText().toString());
+                                data.put("signin_password",password);
                             }catch(JSONException e){
                                 e.printStackTrace();
                             }
@@ -96,6 +112,10 @@ public class MainActivity extends AppCompatActivity {
                             if(!response.getBoolean("status")){
                                 throw new Exception(response.getString("msg"));
                             }
+
+                            Log.d("chatappdb",username+" "+password);
+                            chatappdb.execSQL("INSERT INTO info VALUES('"+username+"','"+password+"');");
+
 
                             //showing success message if everything is okay
                             //
