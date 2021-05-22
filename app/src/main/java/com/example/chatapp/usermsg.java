@@ -97,7 +97,7 @@ public class usermsg extends AppCompatActivity {
 
                 JSONObject data = new JSONObject();
                 try{
-                    data.put("receiver","pranav");
+                    data.put("receiver",username);
 
                 }catch(JSONException e){
                     e.printStackTrace();
